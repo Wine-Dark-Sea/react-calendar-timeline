@@ -30,6 +30,7 @@ export default class Items extends Component {
     dragSnap: PropTypes.number,
     minResizeWidth: PropTypes.number,
     selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    clickTolerance: PropTypes.number.isRequired,
 
     canChangeGroup: PropTypes.bool.isRequired,
     canMove: PropTypes.bool.isRequired,
@@ -77,7 +78,8 @@ export default class Items extends Component {
       nextProps.canChangeGroup === this.props.canChangeGroup &&
       nextProps.canMove === this.props.canMove &&
       nextProps.canResize === this.props.canResize &&
-      nextProps.canSelect === this.props.canSelect     
+      nextProps.canSelect === this.props.canSelect &&
+      nextProps.clickTolerance === this.props.clickTolerance
     )
   }
 
@@ -151,6 +153,7 @@ export default class Items extends Component {
               canvasTimeEnd={this.props.canvasTimeEnd}
               canvasWidth={this.props.canvasWidth}
               dragSnap={this.props.dragSnap}
+              clickTolerance={this.props.clickTolerance}
               minResizeWidth={this.props.minResizeWidth}
               onResizing={this.props.itemResizing}
               onResized={this.props.itemResized}

@@ -805,6 +805,7 @@ export default class ReactCalendarTimeline extends Component {
         canvasWidth={canvasWidth}
         dimensionItems={dimensionItems}
         groupTops={groupTops}
+        clickTolerance={this.props.clickTolerance}
         items={this.props.items}
         groups={this.props.groups}
         keys={this.props.keys}

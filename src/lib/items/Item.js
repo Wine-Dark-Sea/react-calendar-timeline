@@ -28,6 +28,7 @@ export default class Item extends Component {
     canvasTimeEnd: PropTypes.number.isRequired,
     canvasWidth: PropTypes.number.isRequired,
     order: PropTypes.object,
+    clickTolerance: PropTypes.number.isRequired,
 
     dragSnap: PropTypes.number,
     minResizeWidth: PropTypes.number,
@@ -425,7 +426,7 @@ export default class Item extends Component {
     const willBeAbleToResizeRight =
       this.props.selected && this.canResizeRight(this.props)
 
-    if(!!this.item){
+    if(this.item){
       if (this.props.selected && !interactMounted) {
         this.mountInteract()
         interactMounted = true
@@ -463,6 +464,8 @@ export default class Item extends Component {
 
   onMouseDown = e => {
     if (!this.state.interactMounted) {
+      this._originClickX = e.clientX
+
       e.preventDefault()
       this.startedClicking = true
     }
@@ -471,7 +474,10 @@ export default class Item extends Component {
   onMouseUp = e => {
     if (!this.state.interactMounted && this.startedClicking) {
       this.startedClicking = false
-      this.actualClick(e, 'click')
+
+      if (Math.abs(this._originClickX - e.clientX) <= this.props.clickTolerance) {
+        this.actualClick(e, 'click')
+      }
     }
   }
 

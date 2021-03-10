@@ -208,7 +208,7 @@ Largest time the calendar can zoom to in milliseconds. Default `5 * 365.24 * 864
 
 ## clickTolerance
 
-How many pixels we can drag the background for it to be counted as a click on the background. Default `3`
+How many pixels we can drag the background for it to be counted as a click. Default `3`
 
 ## canMove
 

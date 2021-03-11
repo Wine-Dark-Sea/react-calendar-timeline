@@ -483,6 +483,8 @@ export default class Item extends Component {
 
   onTouchStart = e => {
     if (!this.state.interactMounted) {
+      this._originClickX = e.touches[0].clientX
+
       e.preventDefault()
       this.startedTouching = true
     }
@@ -491,7 +493,10 @@ export default class Item extends Component {
   onTouchEnd = e => {
     if (!this.state.interactMounted && this.startedTouching) {
       this.startedTouching = false
-      this.actualClick(e, 'touch')
+
+      if (Math.abs(this._originClickX - e.changedTouches[0].clientX) <= this.props.clickTolerance) {
+        this.actualClick(e, 'touch')
+      }
     }
   }
 
